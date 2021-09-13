@@ -121,7 +121,9 @@ def editProduct(request,productId):
                     product.category= Category.objects.get(id = p['category'])
                     product.quantity = float(p["quantity"] or 0)
                     product.description = str(p["description"]).strip()
-                    product.image = request.FILES.get('id_image') or 'Products/default.jpg'
+                    image = request.FILES.get('id_image') if request.FILES.get('id_image') else product.image
+                    # if not product.image == image:
+                    product.image = image
                     product.save()
             if "Delete" in request.POST:
                 if request.user == product.publisher:

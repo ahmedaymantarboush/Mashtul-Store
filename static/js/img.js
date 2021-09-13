@@ -8,7 +8,7 @@ function upload() {
         reader.readAsDataURL(file);
         reader.onloadend = function() {
             $('#userProfileImage').css('background-image', 'url("' + reader.result + '")');
-            console.log('url("' + reader.result + '")')
+            // console.log('url("' + reader.result + '")')
         }
     }
 };
