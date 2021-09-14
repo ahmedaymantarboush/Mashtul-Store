@@ -4,8 +4,8 @@ from django.utils import timezone
 
 #Funcions
 def uploadTo(instance, filename):
-    fileName, ext = filename.split(".")
-    return ( f"Products/{str(instance.category)}/{str(instance.publisher)}/{str(instance.name)}/{str(instance.name)}.{ext}" )
+    # fileName, ext = filename.split(".")
+    return ( f"Products/{str(instance.category)}/{str(instance.publisher)}/{str(instance.name)}/{str(instance.name)}_{str(filename)}" )
 
 # Create your models here.
 class Category(models.Model):

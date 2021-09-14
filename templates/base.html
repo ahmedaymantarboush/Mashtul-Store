@@ -26,12 +26,22 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{% url 'Products:index' %}">المنتجات</a>
+                        <a class="nav-link
+                            {% if '/' == request.path %}
+                                 active
+                            {% endif %}
+                        " aria-current="page" href="{% url 'Products:index' %}">المنتجات</a>
                     </li>
 
                     {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الحساب</a>
+                        {% comment %} {{request.path}}  {% endcomment %}
+
+                        <a class="nav-link dropdown-toggle 
+                            {% if '/accounts' in request.path or '/products' in request.path  %}
+                                 active
+                            {% endif %}
+                        " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">الحساب</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <div class="userProfileImage" style="background-image:url({{ currentUser.image.url }});background-size: contain;background-position: center;"></div>
                             <h6>{{currentUser.user.first_name}} {{currentUser.user.last_name}}</h6>
@@ -62,7 +72,11 @@
                     </li>
                     {% else %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">انضم لنا</a>
+                        <a class="nav-link dropdown-toggle 
+                            {% if '/accounts' in request.path or '/products' in request.path  %}
+                                 active
+                            {% endif %}
+                        " href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">انضم لنا</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="{% url 'UserProfile:signin' %}">تسجيل الدخول</a></li>
                             <li><a class="dropdown-item" href="{% url 'UserProfile:signUp' %}">انشاء حساب</a></li>
@@ -75,7 +89,11 @@
                     </li>
                     -->
                     <li class="nav-item">
-                        <a class="nav-link" href="#">تواصل معنا</a>
+                        <a class="nav-link
+                            {% if '/contact-us' == request.path %}
+                                 active
+                            {% endif %}
+                        " href="{% url 'ContactUs:contactUs' %}">تواصل معنا</a>
                     </li>
                 </ul>
                 <form method="GET" class="d-flex" action="{% url 'Products:index' %}">
@@ -92,7 +110,7 @@
         <!-- Grid container -->
         <div class="container p-4">
             <!-- Section: Social media -->
-            <section class="mb-4">
+            {% comment %} <section class="mb-4">
                 <!-- Facebook -->
                 <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
 
@@ -110,11 +128,11 @@
 
                 <!-- Github -->
                 <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-github"></i></a>
-            </section>
+            </section> {% endcomment %}
             <!-- Section: Social media -->
 
             <!-- Section: Form -->
-            <section class="">
+            <section style="width:100%">
                 <form method="GET" class="d-flex" action="{% url 'Products:index' %}">
                     <input class="form-control me-2" type="search" name=search placeholder="بحث" aria-label="بحث">
                     <button class="btn btn-outline-success" type="submit">بحث</button>
@@ -129,11 +147,11 @@
                     Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt distinctio earum repellat quaerat voluptatibus placeat nam, commodi optio pariatur est quia magnam eum harum corrupti dicta, aliquam sequi voluptate quas.
                 </p>
             </section> -->
-            <br>
+            {% comment %} <br> {% endcomment %}
             <!-- Section: Text -->
 
             <!-- Section: Links -->
-            <section class="">
+            {% comment %} <section class="">
                 <!--Grid row-->
                 <div class="row">
                     <!--Grid column-->
@@ -221,14 +239,14 @@
                     <!--Grid column-->
                 </div>
                 <!--Grid row-->
-            </section>
+            </section> {% endcomment %}
             <!-- Section: Links -->
         </div>
         <!-- Grid container -->
 
         <!-- Copyright -->
         <div class="text-center p-3" style="background-color: #212529!important;border-top: 1px solid #3f4143">
-            &copy;2021 Copyright: Ahmed Tarboush
+           Made With <i class="fa fa-heart" style="color:red;"></i> By Ahmed Tarboush &copy; 2021
         </div>
         <!-- Copyright -->
     </footer>
@@ -238,6 +256,7 @@
     <script src="{% static 'js\bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js\popper.min.js' %}"></script>
     <script src="{% static 'js\bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/form.js' %}"></script>
 
 </body>
 

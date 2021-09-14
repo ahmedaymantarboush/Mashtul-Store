@@ -35,7 +35,7 @@ INSTALLED_APPS = [
     'userProfile',
     'products',
     'comments',
-
+    'contactUs',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -145,3 +145,17 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 ALLOWED_HOSTS = ['*']
 X_FRAME_OPTIONS = '*'
 # DEBUG = False
+
+
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = [
+    "smtp.gmail.com",
+    "smtp-mail.outlook.com",
+    "smtp.mail.yahoo.com"
+    ]
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'mashtulstore@gmail.com'
+EMAIL_HOST_PASSWORD = '@hmed&@ym@n'

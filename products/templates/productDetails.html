@@ -62,7 +62,7 @@
                 </div>
             </div>
             <hr class="featurette-divider">
-            <form method="POST" >
+            <form class="product" id="frm{{product.id}}" method="POST" >
               {% csrf_token %}
               <div class="shocase-rt-bot">
                   <div class="float-qty-chart" style="padding:10px;">
@@ -74,9 +74,9 @@
                   </div>
                   <div class="card-body ">
                 {% if user != product.publisher %}
-                    <button type="submit " name="buy" href="# " class="frmBtn card-link ">شراء الأن</button>
+                    <button type="submit" onclick="clickedElement = 'buy';" id="buy" name="buy" href="# " class="frmBtn card-link ">شراء الأن</button>
                      |
-                    <button type="submit" name="addToCart" href="#" class="frmBtn card-link">
+                    <button type="submit" onclick="clickedElement = 'addToCart';" id="addToCart" name="addToCart" href="#" class="frmBtn card-link">
                         {% if product in currentUser.cart.all  %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart-x-fill" viewBox="0 0 16 16">
                             <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zM6 14a1 1 0 1 1-2 0 1 1 0 0 1 2 0zm7 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0zM7.354 5.646 8.5 6.793l1.146-1.147a.5.5 0 0 1 .708.708L9.207 7.5l1.147 1.146a.5.5 0 0 1-.708.708L8.5 8.207 7.354 9.354a.5.5 0 1 1-.708-.708L7.793 7.5 6.646 6.354a.5.5 0 1 1 .708-.708z"/>
@@ -88,7 +88,7 @@
                         </svg>
                         {% endif %}
                     </button> |
-                    <button type="submit" name="love" href="#" class="love frmBtn card-link">
+                    <button type="submit" onclick="clickedElement = 'love';" id="love" name="love" href="#" class="love frmBtn card-link">
                     {% if product in currentUser.wishes.all %}
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
                             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"></path>
