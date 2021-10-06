@@ -58,8 +58,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="pull-left rating-stars">
-                </div>
             </div>
             {% if request.user.is_authenticated %}                
             <hr class="featurette-divider">
@@ -110,11 +108,11 @@
                         </svg>
                     </a>
                 {% endif %}
-                {% endif %}
                   </div>
-                  <hr class="featurette-divider">
               </div>
               </form>
+            {% endif %}
+            <hr class="featurette-divider">
             <div class="showcase-last ">
                 <h3>وصف المنتج: </h3>
                 <p dir="auto">
