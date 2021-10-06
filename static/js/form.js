@@ -13,7 +13,7 @@ const deleteError = selector =>{
 r = null
 
 clickedElement = ""
-products = document.querySelectorAll('.product')
+products = document.querySelector('.productDetails') ? document.querySelectorAll('.productDetails') : document.querySelectorAll('.product')
 products ? products.forEach(form=>{
     form.addEventListener('submit',e=>{
         e.preventDefault()

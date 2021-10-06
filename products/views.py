@@ -142,6 +142,9 @@ def editProduct(request,productId):
             return render(request,"editProduct.html",context)
         else:
             return redirect("Products:index")
+    else:
+        return redirect("Products:index")
+
 
 def cart(request):
     if request.user.is_authenticated:
