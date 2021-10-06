@@ -89,6 +89,11 @@
     body>div>div>div>div.col-md-8>div>div>form>div:last-of-type {
         display: none;
     }
+    .error{
+        margin: 9px 80px 0 0;
+        max-width: calc(100% - 80px);
+        color: #AD1717;
+    }   
 </style>
 
 <div class="container">
@@ -120,74 +125,67 @@
             <div class="col-md-8">
                 <div class="card mb-3">
                     <div class="card-body">
-                        <form action="{% url 'UserProfile:editValue' %}" method="post" enctype="multipart/form-data">
+                        <form id='editProfile' action="{% url 'UserProfile:editValue' %}" method="post" enctype="multipart/form-data">
                             {% csrf_token %}
-                            <div class="row">
+                            <div id='first_name' class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">الاسم الأول:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{userForm.first_name}}
-                                    <!-- <input class="editValue" type="text" name="firstName" value="{{currentUser.user.first_name}}"> -->
                                 </div>
                             </div>
                             <hr />
-                            <div class="row">
+                            <div id ='last_name' class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">الاسم الثاني:</h6>
+                                    <h6 class="mb-0">الاسم الأخير:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{userForm.last_name}}
-                                    <!-- <input class="editValue" type="text" name="lastName" value="{{currentUser.user.last_name}}"> -->
                                 </div>
                             </div>
                             <hr />
-                            <div class="row">
+                            <div id ='watermark' class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">العلامة المائية:</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    {{profileForm.watermark}}
+                                </div>
+                            </div>
+                            <hr />
+                            <div id ='email' class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">الايميل:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
                                     {{userForm.email}}
-                                    <!-- <input class="editValue" type="text" name="email" value="{{currentUser.user.email}}"> -->
                                 </div>
                             </div>
                             <hr />
-                            <!-- <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">كلمة المرور:</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <input class="editValue" type="text" name="password">
-                                    {{userForm.password}}
-                                </div>
-                            </div>
-                            <hr /> -->
-                            <div class="row">
+                            <div id ='phoneNumber' class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">رقم الهاتف:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <!-- <input class="editValue" type="text" name="phoneNumber" value="{{currentUser.phoneNumber}}"> -->
                                     {{profileForm.phoneNumber}}
                                 </div>
                             </div>
                             <hr />
-                            <div class="row">
+                            <div id ='address1' class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">العنوان الأول:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <!-- <input class="editValue" type="text" name="address1" value="{{currentUser.address1}}"> -->
                                     {{profileForm.address1}}
                                 </div>
                             </div>
                             <hr />
-                            <div class="row">
+                            <div id ='address2' class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">العنوان الثاني:</h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <!-- <input class="editValue" type="text" name="address2" value="{{currentUser.address2}}"> -->
                                     {{profileForm.address2}}
                                 </div>
                             </div>
@@ -195,10 +193,8 @@
                             <div class="row" style="padding: 0 20px; margin-top: 20px;">
                                 <input type="submit" class="btn btn-success" value="حفظ البيانات">
                             </div>
-                            <!-- <input type="file" id="id_image" name="image" onchange="upload()" accept="image/*" style="display: none;"> -->
                             <div class="row" style="padding: 0 20px; margin-top: 20px;">
                                 {{profileForm.image}}
-                                <!-- <input type="submit" class="btn btn-success" value="حفظ البيانات"> -->
                             </div>
                         </form>
                     </div>

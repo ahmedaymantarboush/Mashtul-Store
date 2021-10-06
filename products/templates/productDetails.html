@@ -73,7 +73,7 @@
                       </h5>
                   </div>
                   <div class="card-body ">
-                {% if user != product.publisher %}
+                {% if user != product.publisher and request.user.is_authenticated %}
                     <button type="submit" onclick="clickedElement = 'buy';" id="buy" name="buy" href="# " class="frmBtn card-link ">شراء الأن</button>
                      |
                     <button type="submit" onclick="clickedElement = 'addToCart';" id="addToCart" name="addToCart" href="#" class="frmBtn card-link">

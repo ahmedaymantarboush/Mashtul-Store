@@ -12,7 +12,7 @@ def profile(request):
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user)
         currentUser = Profile.objects.get(user=user)
-        products = Product.objects.filter(publisher=user)
+        products = Product.objects.filter(publisher=currentUser)
         context = {
             "products": products.order_by("-order_key"),
             "currentUser": currentUser,
@@ -25,14 +25,12 @@ def editProfile(request):
     if request.user.is_authenticated:
         user = User.objects.get(username=request.user)
         currentUser = Profile.objects.get(user=user)
-        products = Product.objects.filter(publisher=user)
 
         userForm = UpdateUserForm(instance=request.user)
         profile = Profile.objects.get(user=user)
         profileForm = UpdateProfileForm(instance=profile)
 
         context = {
-            "products": products.order_by("-order_key"),
             "currentUser": currentUser,
             "profileForm": profileForm,
             "userForm": userForm,
@@ -57,7 +55,7 @@ def update(request,Update=True):
             
             userForm = UpdateUserForm(request.POST, instance=user)
             profile = Profile.objects.get(user=user)
-            print(profile)
+            
             profileForm = UpdateProfileForm(request.POST, request.FILES, instance=profile)
 
             if userForm.is_valid and profileForm.is_valid:
@@ -78,11 +76,13 @@ def signUp(request):
 def addAccount(request):
     if request.method == "POST":
         post = request.POST
-        username= post['username']
-        password= post['password']
-        first_name= post['first_name']
-        last_name= post['last_name']
-        if not User.objects.filter(username=username):
+        
+        username= post['username'] if len(post['username'])>=3 else None
+        password= post['password'] if len(post['password'])>=3 else None
+        first_name= post['first_name'] if len(post['first_name'])>=3 else None
+        last_name= post['last_name'] if len(post['last_name'])>=3 else None
+
+        if username and password and first_name and last_name :
             User.objects.create_user(
                 username = username,
                 password = password,
@@ -90,7 +90,11 @@ def addAccount(request):
                 last_name = last_name,
             )
             update(request,False)
-    return redirect("/accounts/signin")
+            return redirect("/accounts/signin")
+        else:
+            return redirect("/accounts/signUp")
+    else:
+        return redirect("/accounts/signUp")
 
 def signin(request):
     if not request.user.is_authenticated:

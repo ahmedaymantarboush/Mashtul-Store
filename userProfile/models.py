@@ -24,7 +24,7 @@ class Profile(models.Model):
     products = models.ManyToManyField("products.Product", related_name='products', blank=True)
     wishes = models.ManyToManyField("products.Product", related_name='wishes', blank=True)
     cart = models.ManyToManyField("products.Product", related_name='cart', blank=True)
-
+    watermark = models.CharField(max_length=50)
     class Meta:
         verbose_name = ("Profile")
         verbose_name_plural = ("Profiles")

@@ -1,3 +1,4 @@
+from userProfile.models import Profile
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -50,7 +51,7 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category',default=0)
     rate = models.FloatField(default=0)
     raters = models.ManyToManyField(User, blank=True)
-    publisher = models.ForeignKey(User, on_delete=models.CASCADE, related_name='publisher')
+    publisher = models.ForeignKey(Profile, on_delete=models.CASCADE, related_name='publisher')
     publishedAt = models.DateField(default=timezone.now )
     image = models.ImageField(upload_to=uploadTo, default="/Products/default.jpg")
     isPremium = models.BooleanField(default=False)

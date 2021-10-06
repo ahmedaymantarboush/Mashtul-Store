@@ -26,7 +26,7 @@ def contactUs(request):
         else:
             return render(request, 'contactUs.html')
     else:
-        return redirect("UserProfile:signUp")
+        return redirect("UserProfile:signIn")
 
 
 

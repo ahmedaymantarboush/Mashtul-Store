@@ -207,7 +207,7 @@ def add(request):
                 sale=sale,
                 unit=unit,
                 description=description,
-                publisher=request.user,
+                publisher=Profile.objects.get(user=request.user),
                 category=category,
                 image=image
                 # isPremium=False

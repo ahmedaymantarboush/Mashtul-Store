@@ -113,10 +113,19 @@
                         <hr />
                         <div class="row">
                             <div class="col-sm-3">
-                                <h6 class="mb-0">الاسم الثاني:</h6>
+                                <h6 class="mb-0">الاسم الأخير:</h6>
                             </div>
                             <div class="col-sm-9 text-secondary">
                                 {{currentUser.user.last_name}}
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <h6 class="mb-0">العلامة المائية:</h6>
+                            </div>
+                            <div class="col-sm-9 text-secondary">
+                                {{currentUser.watermark}}
                             </div>
                         </div>
                         <hr />
@@ -166,7 +175,7 @@
                         {% csrf_token %}
 
                         <input type="hidden" name="id" value="{{product.id}}">
-                        <div style="background: url({{ product.image.url }});" class="productImage card-img-top">
+                        <div style="background: url({{ product.image.url }});" data-auther="{{ product.publisher.watermark }}" class="productImage card-img-top">
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{product.name}}</h5>
