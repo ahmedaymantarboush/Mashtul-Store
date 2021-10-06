@@ -46,6 +46,19 @@ def editValue(request):
     return redirect("/accounts/profile")
 
 def update(request,Update=True):
+    print(f'''
+    
+    
+    
+    
+        {request}
+        
+        {request.POST}
+
+        {request.FILES}
+    
+    
+    ''')
     if ( not request.user.is_authenticated and not Update )or (request.user.is_authenticated and Update):
         if request.method == "POST":
             if Update:
@@ -53,6 +66,7 @@ def update(request,Update=True):
             else:
                 user = User.objects.get(username=request.POST['username'])  
             
+
             userForm = UpdateUserForm(request.POST, instance=user)
             profile = Profile.objects.get(user=user)
             

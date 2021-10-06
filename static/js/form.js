@@ -100,6 +100,7 @@ signUp ? signUp.addEventListener("submit",e=>{
     address1Input = form.address1
     address2Input = form.address2
     csrfToken = form.csrfmiddlewaretoken.value
+    image = form.image.files[0]
     
     if (firstNameInput.value.length >= 3){
         first_name = firstNameInput.value
@@ -166,28 +167,30 @@ signUp ? signUp.addEventListener("submit",e=>{
     }
     address2 = address2Input.value ? address2Input.value : "لا يوجد!"
     
-    var freshData = [csrfToken,first_name,last_name,username,watermark,email,password,phoneNumber,address1,address2];
+    var freshData = [csrfToken,first_name,last_name,username,watermark,email,password,phoneNumber,address1,address2,image];
     validData = freshData.filter(i=>i)
     is_valid = validData.length == freshData.length
     if (is_valid) {    
-        var data = [
-            "csrfmiddlewaretoken="+csrfToken,
-            "first_name="+first_name,
-            "last_name="+last_name,
-            "username="+username,
-            "watermark="+watermark,
-            "email="+email,
-            "password="+password,
-            "phoneNumber="+phoneNumber,
-            "address1="+address1,
-            "address2="+address2,
-        ];
-        var queryString = data.join("&");
-        
+        // var data = [
+        //     "csrfmiddlewaretoken="+csrfToken,
+        //     "first_name="+first_name,
+        //     "last_name="+last_name,
+        //     "username="+username,
+        //     "watermark="+watermark,
+        //     "email="+email,
+        //     "password="+password,
+        //     "phoneNumber="+phoneNumber,
+        //     "address1="+address1,
+        //     "address2="+address2,
+        //     "image="+image,
+        // ];
+        // var queryString = data.join("&");
+        // console.log(queryString);
+        formData = new FormData(form);
         const xhttp = new XMLHttpRequest
         xhttp.open("POST", form.action);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(queryString)
+        // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send(formData)
 
         xhttp.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200){
@@ -217,7 +220,9 @@ editProfile ? editProfile.addEventListener("submit",e=>{
     address1Input = form.address1
     address2Input = form.address2
     csrfToken = form.csrfmiddlewaretoken.value
-    
+    image = form.image.files[0]
+    image_clear = form['image-clear'].value 
+
     if (firstNameInput.value.length >= 3){
         first_name = firstNameInput.value
         deleteError('#first_name')
@@ -267,26 +272,15 @@ editProfile ? editProfile.addEventListener("submit",e=>{
     }
     address2 = address2Input.value ? address2Input.value : "لا يوجد!"
     
-    var freshData = [csrfToken,first_name,last_name,watermark,email,phoneNumber,address1,address2];
+    var freshData = [csrfToken,first_name,last_name,watermark,email,phoneNumber,address1,address2,image];
     validData = freshData.filter(i=>i)
     is_valid = validData.length == freshData.length
     if (is_valid) {    
-        var data = [
-            "csrfmiddlewaretoken="+csrfToken,
-            "first_name="+first_name,
-            "last_name="+last_name,
-            "watermark="+watermark,
-            "email="+email,
-            "phoneNumber="+phoneNumber,
-            "address1="+address1,
-            "address2="+address2,
-        ];
-        var queryString = data.join("&");
-        
+
+        formData = new FormData(form);
         const xhttp = new XMLHttpRequest
         xhttp.open("POST", form.action);
-        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send(queryString)
+        xhttp.send(formData)
 
         xhttp.onreadystatechange = function(){
             if (this.readyState == 4 && this.status == 200){

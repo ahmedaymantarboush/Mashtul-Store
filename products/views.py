@@ -109,7 +109,7 @@ def editProduct(request,productId):
         if request.method == "POST":
             if "Save" in request.POST:
                 p=request.POST
-                if request.user == product.publisher:
+                if request.user == product.publisher.user:
                     product.name = str(p["productName"]).strip()
                     price = float(p["price"] or 0)
                     product.price = price
@@ -126,12 +126,12 @@ def editProduct(request,productId):
                     product.image = image
                     product.save()
             if "Delete" in request.POST:
-                if request.user == product.publisher:
+                if request.user == product.publisher.user:
                     product.delete()
                     return redirect("Products:index")
             return redirect("Products:productDetails" ,productId)
                     
-        if request.user == product.publisher:
+        if request.user == product.publisher.user:
             # print("\n\n\n\n\n\n\n\n\n\n\n" + product.name + "\n\n\n\n\n\n\n\n\n")
             context = {
                 "product":product,
@@ -142,8 +142,8 @@ def editProduct(request,productId):
             return render(request,"editProduct.html",context)
         else:
             return redirect("Products:index")
-    else:
-        return redirect("Products:index")
+    # else:
+    #     return redirect("Products:index")
 
 
 def cart(request):
