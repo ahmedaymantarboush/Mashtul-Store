@@ -61,9 +61,8 @@
                 <div class="pull-left rating-stars">
                 </div>
             </div>
-            <hr class="featurette-divider">
             {% if request.user.is_authenticated %}                
-
+            <hr class="featurette-divider">
             <form class="productDetails" id="frm{{product.id}}" method="POST" >
               {% csrf_token %}
               <div class="shocase-rt-bot">
